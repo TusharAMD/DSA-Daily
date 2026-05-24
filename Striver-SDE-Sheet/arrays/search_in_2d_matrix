@@ -1,0 +1,35 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m = len(matrix)
+        n = len(matrix[0])
+        top=0
+        bottom=m-1
+        found = None
+        while (top<=bottom):
+            print("=="*3)
+            print("hi",top,bottom)
+            curr=(top+bottom)//2
+            print(curr)
+            if target>matrix[curr][-1]:
+                top=curr+1
+            elif target<matrix[curr][0]:
+                bottom=curr-1
+            else:
+                found=curr
+                break
+        
+        if found == None:
+            return False
+        
+        #return target in matrix[found]
+        low = 0
+        high = len(matrix[found])
+        while low<=high:
+            curr = (low+high)//2
+            if matrix[found][curr]==target:
+                return True
+            elif target<matrix[found][curr]:
+                high=curr-1
+            else:
+                low=curr+1
+        return False
